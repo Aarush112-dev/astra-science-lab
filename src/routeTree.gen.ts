@@ -10,33 +10,80 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AstrophysicsRouteImport } from './routes/astrophysics'
+import { Route as ChemistryRouteImport } from './routes/chemistry'
+import { Route as ExperimentsRouteImport } from './routes/experiments'
+import { Route as LaboratoryRouteImport } from './routes/laboratory'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AstrophysicsRoute = AstrophysicsRouteImport.update({
+  id: '/astrophysics',
+  path: '/astrophysics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChemistryRoute = ChemistryRouteImport.update({
+  id: '/chemistry',
+  path: '/chemistry',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperimentsRoute = ExperimentsRouteImport.update({
+  id: '/experiments',
+  path: '/experiments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaboratoryRoute = LaboratoryRouteImport.update({
+  id: '/laboratory',
+  path: '/laboratory',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/astrophysics': typeof AstrophysicsRoute
+  '/chemistry': typeof ChemistryRoute
+  '/experiments': typeof ExperimentsRoute
+  '/laboratory': typeof LaboratoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/astrophysics': typeof AstrophysicsRoute
+  '/chemistry': typeof ChemistryRoute
+  '/experiments': typeof ExperimentsRoute
+  '/laboratory': typeof LaboratoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/astrophysics': typeof AstrophysicsRoute
+  '/chemistry': typeof ChemistryRoute
+  '/experiments': typeof ExperimentsRoute
+  '/laboratory': typeof LaboratoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/astrophysics' | '/chemistry' | '/experiments' | '/laboratory'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/astrophysics' | '/chemistry' | '/experiments' | '/laboratory'
+  id:
+    | '__root__'
+    | '/'
+    | '/astrophysics'
+    | '/chemistry'
+    | '/experiments'
+    | '/laboratory'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AstrophysicsRoute: typeof AstrophysicsRoute
+  ChemistryRoute: typeof ChemistryRoute
+  ExperimentsRoute: typeof ExperimentsRoute
+  LaboratoryRoute: typeof LaboratoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/astrophysics': {
+      id: '/astrophysics'
+      path: '/astrophysics'
+      fullPath: '/astrophysics'
+      preLoaderRoute: typeof AstrophysicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chemistry': {
+      id: '/chemistry'
+      path: '/chemistry'
+      fullPath: '/chemistry'
+      preLoaderRoute: typeof ChemistryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiments': {
+      id: '/experiments'
+      path: '/experiments'
+      fullPath: '/experiments'
+      preLoaderRoute: typeof ExperimentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laboratory': {
+      id: '/laboratory'
+      path: '/laboratory'
+      fullPath: '/laboratory'
+      preLoaderRoute: typeof LaboratoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AstrophysicsRoute: AstrophysicsRoute,
+  ChemistryRoute: ChemistryRoute,
+  ExperimentsRoute: ExperimentsRoute,
+  LaboratoryRoute: LaboratoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
