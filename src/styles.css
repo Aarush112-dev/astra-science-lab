@@ -68,7 +68,9 @@
 
   --shadow-glow: 0 0 24px -4px color-mix(in oklab, var(--primary) 45%, transparent);
   --shadow-glow-violet: 0 0 28px -6px color-mix(in oklab, var(--violet) 50%, transparent);
-  --shadow-panel: 0 1px 0 0 color-mix(in oklab, var(--foreground) 6%, transparent) inset, 0 12px 40px -20px oklch(0 0 0 / 0.8);
+  --shadow-panel:
+    0 1px 0 0 color-mix(in oklab, var(--foreground) 6%, transparent) inset,
+    0 12px 40px -20px oklch(0 0 0 / 0.8);
 
   --animate-drift: drift 14s ease-in-out infinite;
   --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
@@ -123,20 +125,40 @@
 }
 
 @keyframes drift {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(6px, -10px, 0); }
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(6px, -10px, 0);
+  }
 }
 @keyframes pulse-soft {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes scan {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(100vh); }
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100vh);
+  }
 }
 
 @utility panel {
@@ -170,7 +192,15 @@
     radial-gradient(1.5px 1.5px at 55% 45%, oklch(0.9 0.05 210 / 0.5) 50%, transparent 51%),
     radial-gradient(1px 1px at 92% 10%, oklch(0.95 0 0 / 0.3) 50%, transparent 51%),
     radial-gradient(1px 1px at 30% 60%, oklch(0.95 0 0 / 0.3) 50%, transparent 51%);
-  background-size: 600px 600px, 500px 500px, 700px 700px, 450px 450px, 550px 550px, 650px 650px, 400px 400px, 520px 520px;
+  background-size:
+    600px 600px,
+    500px 500px,
+    700px 700px,
+    450px 450px,
+    550px 550px,
+    650px 650px,
+    400px 400px,
+    520px 520px;
 }
 
 @utility label-mono {
@@ -198,22 +228,31 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
   }
   ::selection {
     background: color-mix(in oklab, var(--primary) 35%, transparent);
   }
-  .katex { font-size: 1.05em; }
+  .katex {
+    font-size: 1.05em;
+  }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
   }
-  .reduce-motion *, .reduce-motion *::before, .reduce-motion *::after {
+  .reduce-motion *,
+  .reduce-motion *::before,
+  .reduce-motion *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

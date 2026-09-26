@@ -11,7 +11,15 @@ export interface EquationDef {
   kind?: "exact" | "approximation" | "model";
 }
 
-export function Tex({ tex, block = false, className }: { tex: string; block?: boolean; className?: string }) {
+export function Tex({
+  tex,
+  block = false,
+  className,
+}: {
+  tex: string;
+  block?: boolean;
+  className?: string;
+}) {
   const html = useMemo(() => {
     try {
       return katex.renderToString(tex, { displayMode: block, throwOnError: false });
@@ -22,7 +30,13 @@ export function Tex({ tex, block = false, className }: { tex: string; block?: bo
   return <span className={className} dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-export function EquationPanel({ equations, defaultOpen = false }: { equations: EquationDef[]; defaultOpen?: boolean }) {
+export function EquationPanel({
+  equations,
+  defaultOpen = false,
+}: {
+  equations: EquationDef[];
+  defaultOpen?: boolean;
+}) {
   const [open, setOpen] = useState(defaultOpen);
   const [active, setActive] = useState<number | null>(null);
   return (
@@ -34,7 +48,9 @@ export function EquationPanel({ equations, defaultOpen = false }: { equations: E
         aria-expanded={open}
       >
         <span className="label-mono">Equations · {equations.length}</span>
-        <ChevronDown className={cn("size-4 text-muted-foreground transition-transform", open && "rotate-180")} />
+        <ChevronDown
+          className={cn("size-4 text-muted-foreground transition-transform", open && "rotate-180")}
+        />
       </button>
       {open && (
         <ul className="divide-y divide-border border-t">
@@ -61,7 +77,9 @@ export function EquationPanel({ equations, defaultOpen = false }: { equations: E
                       </dt>
                       <dd className="text-muted-foreground">
                         {s.meaning}
-                        {s.unit && <span className="ml-1 font-mono text-foreground/70">[{s.unit}]</span>}
+                        {s.unit && (
+                          <span className="ml-1 font-mono text-foreground/70">[{s.unit}]</span>
+                        )}
                       </dd>
                     </div>
                   ))}
@@ -82,5 +100,14 @@ export function KindBadge({ kind }: { kind: "exact" | "approximation" | "model" 
     model: "border-violet/40 text-violet",
   }[kind];
   const label = { exact: "Exact", approximation: "Approximation", model: "Simplified model" }[kind];
-  return <span className={cn("rounded-sm border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider", styles)}>{label}</span>;
+  return (
+    <span
+      className={cn(
+        "rounded-sm border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider",
+        styles,
+      )}
+    >
+      {label}
+    </span>
+  );
 }

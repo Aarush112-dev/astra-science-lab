@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export type DrawFn = (ctx: CanvasRenderingContext2D, w: number, h: number, dt: number, t: number) => void;
+export type DrawFn = (
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  dt: number,
+  t: number,
+) => void;
 
 /**
  * Runs a DPR-aware requestAnimationFrame loop on a canvas.
@@ -85,13 +91,27 @@ export function tempToColor(T: number): string {
 
 /** Wavelength (nm) -> css colour */
 export function wavelengthToColor(l: number, alpha = 1): string {
-  let r = 0, g = 0, b = 0;
-  if (l >= 380 && l < 440) { r = -(l - 440) / 60; b = 1; }
-  else if (l < 490) { g = (l - 440) / 50; b = 1; }
-  else if (l < 510) { g = 1; b = -(l - 510) / 20; }
-  else if (l < 580) { r = (l - 510) / 70; g = 1; }
-  else if (l < 645) { r = 1; g = -(l - 645) / 65; }
-  else if (l <= 780) { r = 1; }
+  let r = 0,
+    g = 0,
+    b = 0;
+  if (l >= 380 && l < 440) {
+    r = -(l - 440) / 60;
+    b = 1;
+  } else if (l < 490) {
+    g = (l - 440) / 50;
+    b = 1;
+  } else if (l < 510) {
+    g = 1;
+    b = -(l - 510) / 20;
+  } else if (l < 580) {
+    r = (l - 510) / 70;
+    g = 1;
+  } else if (l < 645) {
+    r = 1;
+    g = -(l - 645) / 65;
+  } else if (l <= 780) {
+    r = 1;
+  }
   let f = 1;
   if (l < 420) f = 0.3 + (0.7 * (l - 380)) / 40;
   else if (l > 700) f = 0.3 + (0.7 * (780 - l)) / 80;

@@ -96,7 +96,12 @@ export const labStore = {
   duplicateExperiment(id: string) {
     const src = state.saved.find((s) => s.id === id);
     if (!src) return;
-    setState({ saved: [{ ...src, id: crypto.randomUUID(), name: `${src.name} (copy)`, createdAt: Date.now() }, ...state.saved] });
+    setState({
+      saved: [
+        { ...src, id: crypto.randomUUID(), name: `${src.name} (copy)`, createdAt: Date.now() },
+        ...state.saved,
+      ],
+    });
   },
   deleteExperiment(id: string) {
     setState({ saved: state.saved.filter((s) => s.id !== id) });
@@ -106,11 +111,17 @@ export const labStore = {
   },
   setReduceMotion(reduceMotion: boolean) {
     setState({ reduceMotion });
-    if (typeof document !== "undefined") document.documentElement.classList.toggle("reduce-motion", reduceMotion);
+    if (typeof document !== "undefined")
+      document.documentElement.classList.toggle("reduce-motion", reduceMotion);
   },
 };
 
-const serverSnapshot: LabState = { context: null, saved: [], level: "A-level", reduceMotion: false };
+const serverSnapshot: LabState = {
+  context: null,
+  saved: [],
+  level: "A-level",
+  reduceMotion: false,
+};
 
 export function useLabStore<T>(selector: (s: LabState) => T): T {
   return useSyncExternalStore(
@@ -128,7 +139,9 @@ export function publishContext(ctx: Omit<SimContext, "updatedAt">) {
 export function exportCSV(rows: Record<string, number | string>[], filename: string) {
   if (!rows.length) return;
   const cols = Object.keys(rows[0] ?? {});
-  const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => r[c] ?? "").join(","))].join("\n");
+  const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => r[c] ?? "").join(","))].join(
+    "\n",
+  );
   const blob = new Blob([csv], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");

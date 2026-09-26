@@ -1,0 +1,6 @@
+{
+  "name": "ASTRA LAB — AI Science Laboratory",
+  "description": "An interactive laboratory for exploring the physics and chemistry of the universe.",
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"],
+  "permissions": []
+}

@@ -24,7 +24,13 @@ export interface Series {
   dots?: boolean;
 }
 
-const COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"];
+const COLORS = [
+  "var(--chart-1)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-5)",
+];
 
 /**
  * Interactive scientific chart: drag to zoom (x), reset, hover values, toggle series, log axes.
@@ -73,7 +79,12 @@ export function SciChart({
         {title ? <span className="label-mono">{title}</span> : <span />}
         <div className="flex items-center gap-1">
           {zoom && (
-            <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]" onClick={() => setZoom(null)}>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-6 px-2 text-[10px]"
+              onClick={() => setZoom(null)}
+            >
               Reset zoom
             </Button>
           )}
@@ -84,10 +95,17 @@ export function SciChart({
         <ResponsiveContainer width="100%" height="100%">
           <Chart
             margin={{ top: 8, right: 16, bottom: 20, left: 8 }}
-            onMouseDown={(e) => e?.activeLabel != null && setDrag({ a: Number(e.activeLabel), b: null })}
-            onMouseMove={(e) => drag.a != null && e?.activeLabel != null && setDrag((d) => ({ ...d, b: Number(e.activeLabel) }))}
+            onMouseDown={(e) =>
+              e?.activeLabel != null && setDrag({ a: Number(e.activeLabel), b: null })
+            }
+            onMouseMove={(e) =>
+              drag.a != null &&
+              e?.activeLabel != null &&
+              setDrag((d) => ({ ...d, b: Number(e.activeLabel) }))
+            }
             onMouseUp={() => {
-              if (drag.a != null && drag.b != null && drag.a !== drag.b) setZoom([Math.min(drag.a, drag.b), Math.max(drag.a, drag.b)]);
+              if (drag.a != null && drag.b != null && drag.a !== drag.b)
+                setZoom([Math.min(drag.a, drag.b), Math.max(drag.a, drag.b)]);
               setDrag({ a: null, b: null });
             }}
           >
@@ -100,9 +118,19 @@ export function SciChart({
               scale={logX ? "log" : "linear"}
               allowDataOverflow
               tickFormatter={(v) => fmt(v, 3)}
-              tick={{ fill: "var(--muted-foreground)", fontSize: 10, fontFamily: "var(--font-mono)" }}
+              tick={{
+                fill: "var(--muted-foreground)",
+                fontSize: 10,
+                fontFamily: "var(--font-mono)",
+              }}
               stroke="var(--border)"
-              label={{ value: xLabel, position: "insideBottom", offset: -12, fill: "var(--muted-foreground)", fontSize: 11 }}
+              label={{
+                value: xLabel,
+                position: "insideBottom",
+                offset: -12,
+                fill: "var(--muted-foreground)",
+                fontSize: 11,
+              }}
             />
             <YAxis
               dataKey="y"
@@ -111,13 +139,30 @@ export function SciChart({
               scale={logY ? "log" : "linear"}
               allowDataOverflow
               tickFormatter={(v) => fmt(v, 2)}
-              tick={{ fill: "var(--muted-foreground)", fontSize: 10, fontFamily: "var(--font-mono)" }}
+              tick={{
+                fill: "var(--muted-foreground)",
+                fontSize: 10,
+                fontFamily: "var(--font-mono)",
+              }}
               stroke="var(--border)"
               width={56}
-              label={{ value: yLabel, angle: -90, position: "insideLeft", offset: 4, fill: "var(--muted-foreground)", fontSize: 11 }}
+              label={{
+                value: yLabel,
+                angle: -90,
+                position: "insideLeft",
+                offset: 4,
+                fill: "var(--muted-foreground)",
+                fontSize: 11,
+              }}
             />
             <RTooltip
-              contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 6, fontSize: 11, fontFamily: "var(--font-mono)" }}
+              contentStyle={{
+                background: "var(--popover)",
+                border: "1px solid var(--border)",
+                borderRadius: 6,
+                fontSize: 11,
+                fontFamily: "var(--font-mono)",
+              }}
               labelStyle={{ color: "var(--muted-foreground)" }}
               formatter={(v: number) => fmt(v, 4)}
               labelFormatter={(l) => `${xLabel}: ${fmt(Number(l), 4)}`}
@@ -131,7 +176,11 @@ export function SciChart({
                   setHidden((h) => {
                     const n = new Set(h);
                     const k = series.find((s) => s.name === key)?.key ?? key;
-                    n.has(k) ? n.delete(k) : n.add(k);
+                    if (n.has(k)) {
+                      n.delete(k);
+                    } else {
+                      n.add(k);
+                    }
                     return n;
                   });
                 }}
@@ -139,7 +188,13 @@ export function SciChart({
             )}
             {visible.map((s, i) =>
               scatter ? (
-                <Scatter key={s.key} name={s.name} data={s.data} fill={s.color ?? COLORS[i % COLORS.length]} isAnimationActive={false} />
+                <Scatter
+                  key={s.key}
+                  name={s.name}
+                  data={s.data}
+                  fill={s.color ?? COLORS[i % COLORS.length]}
+                  isAnimationActive={false}
+                />
               ) : (
                 <Line
                   key={s.key}
@@ -155,7 +210,9 @@ export function SciChart({
                 />
               ),
             )}
-            {drag.a != null && drag.b != null && <ReferenceArea x1={drag.a} x2={drag.b} fill="var(--primary)" fillOpacity={0.12} />}
+            {drag.a != null && drag.b != null && (
+              <ReferenceArea x1={drag.a} x2={drag.b} fill="var(--primary)" fillOpacity={0.12} />
+            )}
           </Chart>
         </ResponsiveContainer>
       </div>

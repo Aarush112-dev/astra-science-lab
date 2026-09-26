@@ -81,10 +81,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "ASTRA LAB — AI Science Laboratory" },
-      { name: "description", content: "An interactive laboratory for exploring the physics and chemistry of the universe." },
+      {
+        name: "description",
+        content:
+          "An interactive laboratory for exploring the physics and chemistry of the universe.",
+      },
       { name: "author", content: "ASTRA LAB" },
       { property: "og:title", content: "ASTRA LAB — AI Science Laboratory" },
-      { property: "og:description", content: "Run the experiment. Change the physics. Observe the universe." },
+      {
+        property: "og:description",
+        content: "Run the experiment. Change the physics. Observe the universe.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

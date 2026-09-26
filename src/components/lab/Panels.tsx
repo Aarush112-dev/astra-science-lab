@@ -5,7 +5,17 @@ import { cn } from "@/lib/utils";
 import { fmt } from "@/lib/physics/constants";
 import { Info } from "lucide-react";
 
-export function Panel({ title, children, className, action }: { title?: ReactNode; children: ReactNode; className?: string; action?: ReactNode }) {
+export function Panel({
+  title,
+  children,
+  className,
+  action,
+}: {
+  title?: ReactNode;
+  children: ReactNode;
+  className?: string;
+  action?: ReactNode;
+}) {
   return (
     <section className={cn("panel", className)}>
       {title && (
@@ -58,7 +68,11 @@ export function Param({
           {hint && (
             <Tooltip>
               <TooltipTrigger asChild>
-                <button type="button" aria-label={`About ${label}`} className="text-muted-foreground/60 hover:text-primary">
+                <button
+                  type="button"
+                  aria-label={`About ${label}`}
+                  className="text-muted-foreground/60 hover:text-primary"
+                >
                   <Info className="size-3" />
                 </button>
               </TooltipTrigger>
@@ -85,9 +99,29 @@ export function Param({
 }
 
 /** Readout row for live measurements. `si` shows on hover. */
-export function Readout({ label, value, unit, si, tone }: { label: string; value: string | number; unit?: string; si?: string; tone?: "cyan" | "violet" | "amber" | "emerald" | "rose" }) {
+export function Readout({
+  label,
+  value,
+  unit,
+  si,
+  tone,
+}: {
+  label: string;
+  value: string | number;
+  unit?: string;
+  si?: string;
+  tone?: "cyan" | "violet" | "amber" | "emerald" | "rose";
+}) {
   const v = typeof value === "number" ? fmt(value) : value;
-  const toneClass = tone ? { cyan: "text-cyan", violet: "text-violet", amber: "text-amber", emerald: "text-emerald", rose: "text-rose" }[tone] : "text-foreground";
+  const toneClass = tone
+    ? {
+        cyan: "text-cyan",
+        violet: "text-violet",
+        amber: "text-amber",
+        emerald: "text-emerald",
+        rose: "text-rose",
+      }[tone]
+    : "text-foreground";
   const body = (
     <div className="flex items-baseline justify-between gap-3 border-b border-border/50 py-1.5 text-xs last:border-0">
       <span className="text-muted-foreground">{label}</span>

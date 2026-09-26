@@ -80,15 +80,25 @@ export function LabLayout({
   return (
     <div className="flex min-h-full flex-col">
       <header className="sticky top-0 z-20 flex flex-wrap items-center gap-3 border-b bg-background/80 px-4 py-2.5 backdrop-blur-md md:px-6">
-        <Link to="/laboratory" className="text-muted-foreground hover:text-foreground" aria-label="Back to laboratory">
+        <Link
+          to="/laboratory"
+          className="text-muted-foreground hover:text-foreground"
+          aria-label="Back to laboratory"
+        >
           <ArrowLeft className="size-4" />
         </Link>
         <div className="min-w-0">
-          <div className="label-mono">{meta?.field} · {meta?.subfield}</div>
+          <div className="label-mono">
+            {meta?.field} · {meta?.subfield}
+          </div>
           <h1 className="truncate text-base font-semibold leading-tight">{meta?.name}</h1>
         </div>
         <div className="ml-auto flex flex-wrap items-center gap-2">
-          <div role="radiogroup" aria-label="Difficulty" className="flex rounded-md border bg-card/60 p-0.5">
+          <div
+            role="radiogroup"
+            aria-label="Difficulty"
+            className="flex rounded-md border bg-card/60 p-0.5"
+          >
             {DIFFS.map((d) => (
               <button
                 key={d}
@@ -97,7 +107,9 @@ export function LabLayout({
                 onClick={() => onDifficultyChange(d)}
                 className={cn(
                   "rounded-sm px-2 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors",
-                  difficulty === d ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                  difficulty === d
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {d}
@@ -127,7 +139,10 @@ export function LabLayout({
           {!research && <Assumptions items={assumptions} />}
         </aside>
         <main className="min-w-0 space-y-4">{children}</main>
-        <aside className="space-y-4 xl:sticky xl:top-16 xl:self-start xl:max-h-[calc(100vh-5rem)] xl:overflow-y-auto" aria-label="Analysis">
+        <aside
+          className="space-y-4 xl:sticky xl:top-16 xl:self-start xl:max-h-[calc(100vh-5rem)] xl:overflow-y-auto"
+          aria-label="Analysis"
+        >
           {side}
           {physicsNotes && !research && (
             <section className="panel p-4">
@@ -156,14 +171,28 @@ export function LabLayout({
             <DialogTitle>Save experiment</DialogTitle>
           </DialogHeader>
           <div className="space-y-3">
-            <Input placeholder="Experiment name" value={name} onChange={(e) => setName(e.target.value)} />
-            <Textarea placeholder="Notes, hypothesis, observations…" value={notes} onChange={(e) => setNotes(e.target.value)} />
+            <Input
+              placeholder="Experiment name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Textarea
+              placeholder="Notes, hypothesis, observations…"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
             <div className="rounded-md border bg-background/40 p-3 font-mono text-[11px] text-muted-foreground">
-              {Object.entries(context.parameters).slice(0, 8).map(([k, v]) => (
-                <div key={k}>{k}: {String(v)}</div>
-              ))}
+              {Object.entries(context.parameters)
+                .slice(0, 8)
+                .map(([k, v]) => (
+                  <div key={k}>
+                    {k}: {String(v)}
+                  </div>
+                ))}
             </div>
-            <Button onClick={save} className="w-full">Save to local storage</Button>
+            <Button onClick={save} className="w-full">
+              Save to local storage
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
