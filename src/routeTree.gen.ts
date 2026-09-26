@@ -18,7 +18,9 @@ import { Route as ExperimentsRouteImport } from './routes/experiments'
 import { Route as LaboratoryRouteImport } from './routes/laboratory'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as SavedRouteImport } from './routes/saved'
+import { Route as LabKeplerRouteImport } from './routes/lab/kepler'
 import { Route as LabOrbitalMechanicsRouteImport } from './routes/lab/orbital-mechanics'
+import { Route as LabStellarEvolutionRouteImport } from './routes/lab/stellar-evolution'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -65,9 +67,19 @@ const SavedRoute = SavedRouteImport.update({
   path: '/saved',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabKeplerRoute = LabKeplerRouteImport.update({
+  id: '/lab/kepler',
+  path: '/lab/kepler',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabOrbitalMechanicsRoute = LabOrbitalMechanicsRouteImport.update({
   id: '/lab/orbital-mechanics',
   path: '/lab/orbital-mechanics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabStellarEvolutionRoute = LabStellarEvolutionRouteImport.update({
+  id: '/lab/stellar-evolution',
+  path: '/lab/stellar-evolution',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -81,7 +93,9 @@ export interface FileRoutesByFullPath {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/kepler': typeof LabKeplerRoute
   '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
+  '/lab/stellar-evolution': typeof LabStellarEvolutionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -93,7 +107,9 @@ export interface FileRoutesByTo {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/kepler': typeof LabKeplerRoute
   '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
+  '/lab/stellar-evolution': typeof LabStellarEvolutionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -106,7 +122,9 @@ export interface FileRoutesById {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/kepler': typeof LabKeplerRoute
   '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
+  '/lab/stellar-evolution': typeof LabStellarEvolutionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,7 +138,9 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/kepler'
     | '/lab/orbital-mechanics'
+    | '/lab/stellar-evolution'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -132,7 +152,9 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/kepler'
     | '/lab/orbital-mechanics'
+    | '/lab/stellar-evolution'
   id:
     | '__root__'
     | '/'
@@ -144,7 +166,9 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/kepler'
     | '/lab/orbital-mechanics'
+    | '/lab/stellar-evolution'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -157,7 +181,9 @@ export interface RootRouteChildren {
   LaboratoryRoute: typeof LaboratoryRoute
   LearnRoute: typeof LearnRoute
   SavedRoute: typeof SavedRoute
+  LabKeplerRoute: typeof LabKeplerRoute
   LabOrbitalMechanicsRoute: typeof LabOrbitalMechanicsRoute
+  LabStellarEvolutionRoute: typeof LabStellarEvolutionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -225,11 +251,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SavedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab/kepler': {
+      id: '/lab/kepler'
+      path: '/lab/kepler'
+      fullPath: '/lab/kepler'
+      preLoaderRoute: typeof LabKeplerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/orbital-mechanics': {
       id: '/lab/orbital-mechanics'
       path: '/lab/orbital-mechanics'
       fullPath: '/lab/orbital-mechanics'
       preLoaderRoute: typeof LabOrbitalMechanicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/stellar-evolution': {
+      id: '/lab/stellar-evolution'
+      path: '/lab/stellar-evolution'
+      fullPath: '/lab/stellar-evolution'
+      preLoaderRoute: typeof LabStellarEvolutionRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -245,7 +285,9 @@ const rootRouteChildren: RootRouteChildren = {
   LaboratoryRoute: LaboratoryRoute,
   LearnRoute: LearnRoute,
   SavedRoute: SavedRoute,
+  LabKeplerRoute: LabKeplerRoute,
   LabOrbitalMechanicsRoute: LabOrbitalMechanicsRoute,
+  LabStellarEvolutionRoute: LabStellarEvolutionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
