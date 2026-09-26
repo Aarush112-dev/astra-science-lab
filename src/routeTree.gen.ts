@@ -18,6 +18,9 @@ import { Route as ExperimentsRouteImport } from './routes/experiments'
 import { Route as LaboratoryRouteImport } from './routes/laboratory'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as SavedRouteImport } from './routes/saved'
+import { Route as LabBlackHoleRouteImport } from './routes/lab/black-hole'
+import { Route as LabExoplanetTransitRouteImport } from './routes/lab/exoplanet-transit'
+import { Route as LabHrDiagramRouteImport } from './routes/lab/hr-diagram'
 import { Route as LabKeplerRouteImport } from './routes/lab/kepler'
 import { Route as LabOrbitalMechanicsRouteImport } from './routes/lab/orbital-mechanics'
 import { Route as LabStellarEvolutionRouteImport } from './routes/lab/stellar-evolution'
@@ -67,6 +70,21 @@ const SavedRoute = SavedRouteImport.update({
   path: '/saved',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabBlackHoleRoute = LabBlackHoleRouteImport.update({
+  id: '/lab/black-hole',
+  path: '/lab/black-hole',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabExoplanetTransitRoute = LabExoplanetTransitRouteImport.update({
+  id: '/lab/exoplanet-transit',
+  path: '/lab/exoplanet-transit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabHrDiagramRoute = LabHrDiagramRouteImport.update({
+  id: '/lab/hr-diagram',
+  path: '/lab/hr-diagram',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabKeplerRoute = LabKeplerRouteImport.update({
   id: '/lab/kepler',
   path: '/lab/kepler',
@@ -93,6 +111,9 @@ export interface FileRoutesByFullPath {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/black-hole': typeof LabBlackHoleRoute
+  '/lab/exoplanet-transit': typeof LabExoplanetTransitRoute
+  '/lab/hr-diagram': typeof LabHrDiagramRoute
   '/lab/kepler': typeof LabKeplerRoute
   '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
   '/lab/stellar-evolution': typeof LabStellarEvolutionRoute
@@ -107,6 +128,9 @@ export interface FileRoutesByTo {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/black-hole': typeof LabBlackHoleRoute
+  '/lab/exoplanet-transit': typeof LabExoplanetTransitRoute
+  '/lab/hr-diagram': typeof LabHrDiagramRoute
   '/lab/kepler': typeof LabKeplerRoute
   '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
   '/lab/stellar-evolution': typeof LabStellarEvolutionRoute
@@ -122,6 +146,9 @@ export interface FileRoutesById {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/black-hole': typeof LabBlackHoleRoute
+  '/lab/exoplanet-transit': typeof LabExoplanetTransitRoute
+  '/lab/hr-diagram': typeof LabHrDiagramRoute
   '/lab/kepler': typeof LabKeplerRoute
   '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
   '/lab/stellar-evolution': typeof LabStellarEvolutionRoute
@@ -138,6 +165,9 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/black-hole'
+    | '/lab/exoplanet-transit'
+    | '/lab/hr-diagram'
     | '/lab/kepler'
     | '/lab/orbital-mechanics'
     | '/lab/stellar-evolution'
@@ -152,6 +182,9 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/black-hole'
+    | '/lab/exoplanet-transit'
+    | '/lab/hr-diagram'
     | '/lab/kepler'
     | '/lab/orbital-mechanics'
     | '/lab/stellar-evolution'
@@ -166,6 +199,9 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/black-hole'
+    | '/lab/exoplanet-transit'
+    | '/lab/hr-diagram'
     | '/lab/kepler'
     | '/lab/orbital-mechanics'
     | '/lab/stellar-evolution'
@@ -181,6 +217,9 @@ export interface RootRouteChildren {
   LaboratoryRoute: typeof LaboratoryRoute
   LearnRoute: typeof LearnRoute
   SavedRoute: typeof SavedRoute
+  LabBlackHoleRoute: typeof LabBlackHoleRoute
+  LabExoplanetTransitRoute: typeof LabExoplanetTransitRoute
+  LabHrDiagramRoute: typeof LabHrDiagramRoute
   LabKeplerRoute: typeof LabKeplerRoute
   LabOrbitalMechanicsRoute: typeof LabOrbitalMechanicsRoute
   LabStellarEvolutionRoute: typeof LabStellarEvolutionRoute
@@ -251,6 +290,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SavedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab/black-hole': {
+      id: '/lab/black-hole'
+      path: '/lab/black-hole'
+      fullPath: '/lab/black-hole'
+      preLoaderRoute: typeof LabBlackHoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/exoplanet-transit': {
+      id: '/lab/exoplanet-transit'
+      path: '/lab/exoplanet-transit'
+      fullPath: '/lab/exoplanet-transit'
+      preLoaderRoute: typeof LabExoplanetTransitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/hr-diagram': {
+      id: '/lab/hr-diagram'
+      path: '/lab/hr-diagram'
+      fullPath: '/lab/hr-diagram'
+      preLoaderRoute: typeof LabHrDiagramRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lab/kepler': {
       id: '/lab/kepler'
       path: '/lab/kepler'
@@ -285,6 +345,9 @@ const rootRouteChildren: RootRouteChildren = {
   LaboratoryRoute: LaboratoryRoute,
   LearnRoute: LearnRoute,
   SavedRoute: SavedRoute,
+  LabBlackHoleRoute: LabBlackHoleRoute,
+  LabExoplanetTransitRoute: LabExoplanetTransitRoute,
+  LabHrDiagramRoute: LabHrDiagramRoute,
   LabKeplerRoute: LabKeplerRoute,
   LabOrbitalMechanicsRoute: LabOrbitalMechanicsRoute,
   LabStellarEvolutionRoute: LabStellarEvolutionRoute,
