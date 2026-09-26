@@ -18,6 +18,7 @@ import { Route as ExperimentsRouteImport } from './routes/experiments'
 import { Route as LaboratoryRouteImport } from './routes/laboratory'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as SavedRouteImport } from './routes/saved'
+import { Route as LabOrbitalMechanicsRouteImport } from './routes/lab/orbital-mechanics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const SavedRoute = SavedRouteImport.update({
   path: '/saved',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabOrbitalMechanicsRoute = LabOrbitalMechanicsRouteImport.update({
+  id: '/lab/orbital-mechanics',
+  path: '/lab/orbital-mechanics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/laboratory': typeof LaboratoryRoute
   '/learn': typeof LearnRoute
   '/saved': typeof SavedRoute
+  '/lab/orbital-mechanics': typeof LabOrbitalMechanicsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/orbital-mechanics'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/orbital-mechanics'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/laboratory'
     | '/learn'
     | '/saved'
+    | '/lab/orbital-mechanics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   LaboratoryRoute: typeof LaboratoryRoute
   LearnRoute: typeof LearnRoute
   SavedRoute: typeof SavedRoute
+  LabOrbitalMechanicsRoute: typeof LabOrbitalMechanicsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SavedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab/orbital-mechanics': {
+      id: '/lab/orbital-mechanics'
+      path: '/lab/orbital-mechanics'
+      fullPath: '/lab/orbital-mechanics'
+      preLoaderRoute: typeof LabOrbitalMechanicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   LaboratoryRoute: LaboratoryRoute,
   LearnRoute: LearnRoute,
   SavedRoute: SavedRoute,
+  LabOrbitalMechanicsRoute: LabOrbitalMechanicsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
