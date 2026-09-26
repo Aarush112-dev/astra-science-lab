@@ -127,8 +127,8 @@ export function publishContext(ctx: Omit<SimContext, "updatedAt">) {
 
 export function exportCSV(rows: Record<string, number | string>[], filename: string) {
   if (!rows.length) return;
-  const cols = Object.keys(rows[0]);
-  const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => r[c]).join(","))].join("\n");
+  const cols = Object.keys(rows[0] ?? {});
+  const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => r[c] ?? "").join(","))].join("\n");
   const blob = new Blob([csv], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
