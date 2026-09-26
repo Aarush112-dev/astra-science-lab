@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type DrawFn = (ctx: CanvasRenderingContext2D, w: number, h: number, dt: number, t: number) => void;
 
@@ -60,7 +60,6 @@ export function useTicker(ms = 250) {
   }, [ms, force]);
 }
 
-import { useCallback, useState } from "react";
 function useStateTick() {
   const [n, setN] = useState(0);
   const f = useCallback(() => setN((x) => x + 1), []);
